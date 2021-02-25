@@ -8,9 +8,9 @@ module.exports = {
     execute(bot,myChannel,servethCh){
         setInterval(function () {
             var dateToday = new Date();
-            var meetStart = (dateToday.getDay() === 4) && (dateToday.getHours() === 17) && (dateToday.getMinutes() === 00) && (dateToday.getSeconds() === 00);
-            var meet1hour = (dateToday.getDay() === 4) && (dateToday.getHours() === 16) && (dateToday.getMinutes() === 30) && (dateToday.getSeconds() === 00);
-            var meet5min = (dateToday.getDay() === 4) && (dateToday.getHours() === 16) && (dateToday.getMinutes() === 55) && (dateToday.getSeconds() === 00);
+            var meetStart = (dateToday.getDay() === 4) && (dateToday.getHours() === 9) && (dateToday.getMinutes() === 00) && (dateToday.getSeconds() === 00);
+            var meet1hour = (dateToday.getDay() === 4) && (dateToday.getHours() === 8) && (dateToday.getMinutes() === 30) && (dateToday.getSeconds() === 00);
+            var meet5min = (dateToday.getDay() === 4) && (dateToday.getHours() === 8) && (dateToday.getMinutes() === 55) && (dateToday.getSeconds() === 00);
 
             if (meetStart) {
                 bot.channels.cache.get(myChannel).send("@everyone Our weekly meeting is starting! Join voice channel now.");
