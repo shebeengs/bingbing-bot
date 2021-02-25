@@ -31,7 +31,7 @@ const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
 bot.commands.get('weeklymeeting').execute(bot, myChannel, servethCh); // Weekly meeting every Thursday, 5PM.
-bot.commands.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
+//bot.commands.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
 
 const prefix = '!';
 var setTimer = {};
