@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 
 module.exports = {
-    name: 'payroll',
+    name: 'payrollnope',
     description: 'Remind Micah to pay us every 15 and end of month.',
     execute(bot,myChannel,servethCh){
         setInterval(function () {
