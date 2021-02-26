@@ -8,7 +8,7 @@ module.exports = {
     execute(bot,myChannel,servethCh){
         setInterval(function () {
             var dateToday = new Date();
-            var meetStart = (dateToday.getDay() === 6) && (dateToday.getHours() === 23) && (dateToday.getMinutes() === 22) && (dateToday.getSeconds() === 00);
+            var meetStart = (dateToday.getDay() === 6) && (dateToday.getHours() === 23) && (dateToday.getMinutes() === 25) && (dateToday.getSeconds() === 00);
             var meet1hour = (dateToday.getDay() === 4) && (dateToday.getHours() === 8) && (dateToday.getMinutes() === 30) && (dateToday.getSeconds() === 00);
             var meet5min = (dateToday.getDay() === 4) && (dateToday.getHours() === 8) && (dateToday.getMinutes() === 55) && (dateToday.getSeconds() === 00);
 
