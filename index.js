@@ -5,10 +5,10 @@ const fs = require('fs');
 
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
-bot.commands = new Discord.Collection();
-bot.events = new Discord.Collection();
 
 //handlers
+bot.commands = new Discord.Collection();
+bot.events = new Discord.Collection();
 const eventFiles = fs.readdirSync('./events/').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
@@ -26,14 +26,15 @@ bot.login(TOKEN);
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
 });
-
+// events
 // reminders
 const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
 bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh); // Weekly meeting every Thursday, 5PM.
-//bot.events.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
+bot.events.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
 
+//commands
 const prefix = '!';
 var setTimer = {};
 var loginTime = {};
