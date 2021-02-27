@@ -2,19 +2,14 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const moment = require('moment');
 const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
 
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
-let db = new sqlite3.Database('./db/Botbotbot.db', (err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log('Connected to the Botbotbot SQlite database.');
-  });
-
 bot.commands = new Discord.Collection();
+bot.events = new Discord.Collection();
 
+//handlers
+const eventFiles = fs.readdirSync('./events/').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -22,21 +17,28 @@ for (const file of commandFiles) {
 	bot.commands.set(command.name, command);
 }
 
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	bot.events.set(event.name, event);
+}
+
 bot.login(TOKEN);
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
 });
+
 // reminders
 const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
-bot.commands.get('weeklymeeting').execute(bot, myChannel, servethCh); // Weekly meeting every Thursday, 5PM.
-//bot.commands.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
+bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh); // Weekly meeting every Thursday, 5PM.
+//bot.events.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
 
 const prefix = '!';
 var setTimer = {};
 var loginTime = {};
 var breakLength;
+
 bot.on('message', msg => {
     if (msg.content === 'hello') {
         msg.react('👋');

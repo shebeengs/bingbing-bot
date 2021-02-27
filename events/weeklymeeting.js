@@ -24,7 +24,6 @@ module.exports = {
                 bot.channels.cache.get(myChannel).send("@everyone Weekly meeting in 5 minutes!");
                 bot.channels.cache.get(servethCh).send("@everyone Weekly meeting in 5 minutes!");
             }
-            console.log(dateToday);
         }, 999);
     }
 }
