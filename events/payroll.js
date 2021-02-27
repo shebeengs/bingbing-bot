@@ -14,7 +14,7 @@ module.exports = {
 
             if (every15 || everyEOM) {
                 bot.channels.cache.get(myChannel).send("@everyone It's payday! 🎉");
-                //bot.channels.cache.get(servethCh).send("@everyone It's payday! 🎉");
+                bot.channels.cache.get(servethCh).send("@everyone It's payday! 🎉");
             }
         },999);
     }
