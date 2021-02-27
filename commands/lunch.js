@@ -18,7 +18,7 @@ module.exports = {
                             console.log(setTimer);
                         }
                         else {
-                            msg.reply(`Your lunch ended. Timer stopped.`);
+                            msg.reply(`Your lunch ended.`);
                             delete setTimer[msg.author.id];
                         }
                     }, 5*60*1000);
