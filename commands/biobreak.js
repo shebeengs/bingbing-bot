@@ -22,7 +22,7 @@ module.exports = {
         }
         else {
             msg.react('❌');
-            msg.reply("You're already on a break. Started: `" + moment().calendar(setTimer[msg.author.id]) + '`');
+            msg.reply("You're already on a break. Started: `" + moment().calendar(setTimer[msg.author.id]) + '` \nType `!back` to set another timer.');
         }
     }
 }

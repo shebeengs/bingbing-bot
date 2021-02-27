@@ -46,7 +46,11 @@ bot.on('message', msg => {
     else if (msg.content === 'hi') {
         msg.react('👋');
     }
-    //
+    else if (msg.content === '💩') {
+        breakLength = 15;
+        bot.commands.get('biobreak').execute(msg, setTimer, breakLength);
+    }
+    //commands with prefix
     if (!msg.content.startsWith(prefix) || msg.author.bot) return;
     const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
@@ -73,5 +77,8 @@ bot.on('message', msg => {
     else if (command === 'bio') {
         breakLength = 5;
         bot.commands.get('biobreak').execute(msg, setTimer, breakLength);
+    }
+    else if (command === 'lunch') {
+        bot.commands.get('lunch').execute(msg, setTimer);
     }
 });
