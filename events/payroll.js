@@ -15,7 +15,7 @@ module.exports = {
 
             if (every15 || everyEOM) {
                 bot.channels.cache.get(myChannel).send("@everyone It's payday! 🎉");
-                //bot.channels.cache.get(servethCh).send("@everyone It's payday! 🎉");
+                bot.channels.cache.get(servethCh).send("@everyone It's payday! 🎉");
             }
             console.log(`${dateToday} | ${nextMonth} | ${every15} | ${everyEOM} | result: ${result}`);
             console.log(`Month: ${dateToday.getMonth()}, Date: ${dateToday.getDate()}, Hours: ${dateToday.getHours()}, ${dateToday.getMinutes()}`);
@@ -30,8 +30,3 @@ module.exports = {
         }
     }
 }
-/*function isLastDay(dt) {
-    var test = new Date(dt.getTime());
-    test.setDate(test.getDate() + 1);
-    return test.getDate() === 1;
-} */
