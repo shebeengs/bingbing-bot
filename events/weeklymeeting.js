@@ -1,7 +1,3 @@
-const moment = require('moment');
-const Discord = require('discord.js');
-
-
 module.exports = {
     name: 'weeklymeeting',
     description: 'Weekly meeting every Thursday, 5PM.',
@@ -27,8 +23,3 @@ module.exports = {
         }, 999);
     }
 }
-//const myChannel = client.channels.cache.get('811208862233002008');
-//const reminderDate;
-//const dateToday;
-//function sendReminder()
-//(dateToday.getDay() === 4) && (dateToday.getHours() === 17) && (dateToday.getMinutes() === 00) && (dateToday.getSeconds() === 00)

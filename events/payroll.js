@@ -1,32 +1,16 @@
-const moment = require('moment');
-const Discord = require('discord.js');
-
 module.exports = {
     name: 'payroll',
-    description: 'Remind everyone every payday: 15th and end of month.',
+    description: 'Remind everyone every payday: 1st and 15th of the month.',
     execute(bot,myChannel,servethCh){
         setInterval(function () {
             var dateToday = new Date();
-            var nextMonth = new Date(new Date(dateToday).setMonth(dateToday.getMonth()));
             var every15 = (dateToday.getDate() === 15) && (dateToday.getHours() === 10) && (dateToday.getMinutes() === 00) && (dateToday.getSeconds() === 00);
-            
-            var everyEOM = result && (dateToday.getHours() === 10) && (dateToday.getMinutes() === 00) && (dateToday.getSeconds() === 00);
-            isLastDay(dateToday);
+            var everyEOM = (dateToday.getDate() === 1) && (dateToday.getHours() === 10) && (dateToday.getMinutes() === 00) && (dateToday.getSeconds() === 00);
 
             if (every15 || everyEOM) {
                 bot.channels.cache.get(myChannel).send("@everyone It's payday! 🎉");
                 bot.channels.cache.get(servethCh).send("@everyone It's payday! 🎉");
             }
-            console.log(`${dateToday} | ${nextMonth} | ${every15} | ${everyEOM} | result: ${result}`);
-            console.log(`Month: ${dateToday.getMonth()}, Date: ${dateToday.getDate()}, Hours: ${dateToday.getHours()}, ${dateToday.getMinutes()}`);
-        },999);
-
-        var result;
-        function isLastDay(dateToday) {
-            var test = new Date(dateToday.getTime());
-            test.setDate(test.getDate() + 1);
-            result = test.getDate() === 1;
-            return result;
-        }
+        },999);       
     }
 }
