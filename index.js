@@ -2,37 +2,64 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const moment = require('moment');
 const fs = require('fs');
+const DB = require('pg').Client;
 
-const bot = new Discord.Client();
+//env var
 const TOKEN = process.env.TOKEN;
+const dbUrl = process.env.DATABASE_URL;
+const dbConn = {
+    connectionString: dbUrl,
+    ssl: {
+        rejectUnauthorized: false
+    }
+};
+//clients
+const bot = new Discord.Client();
+const db = new DB(dbConn);
 
 //handlers
 bot.commands = new Discord.Collection();
 bot.events = new Discord.Collection();
+bot.queries = new Discord.Collection();
 const eventFiles = fs.readdirSync('./events/').filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-
+const queryFiles = fs.readdirSync('./queries/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	bot.commands.set(command.name, command);
 }
-
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	bot.events.set(event.name, event);
+}
+for (const file of queryFiles) {
+	const query = require(`./queries/${file}`);
+	bot.queries.set(query.name, query);
 }
 
 bot.login(TOKEN);
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
 });
+
 // events
 // reminders
 const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
-bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh); // Weekly meeting every Thursday, 5PM.
-bot.events.get('payroll').execute(bot, myChannel, servethCh); // Remind Micah to pay us every 15 and end of month.
+bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh);
+bot.events.get('payroll').execute(bot, myChannel, servethCh);
+
+db.connect().then(
+    () => console.log("Test connection successful") 
+).catch(
+    err => console.log(err)
+).then(
+    () => db.end()
+).finally(
+    () => console.log("Connection ended.")
+);
+//
 
 //commands
 const prefix = '!';
@@ -81,5 +108,12 @@ bot.on('message', msg => {
     }
     else if (command === 'lunch') {
         bot.commands.get('lunch').execute(msg, setTimer);
+    }
+    //queries
+    else if (command === 'users'){
+        bot.queries.get('users').execute(msg, dbConn);
+    }
+    else if (command === 'query') {
+        bot.queries.get('query').execute(msg,dbConn,args);
     }
 });

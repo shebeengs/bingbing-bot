@@ -26,7 +26,7 @@ module.exports = {
             }
             else {
                 msg.react('❌');
-                msg.reply("You're already on a break. Started: `" + moment().calendar(setTimer[msg.author.id]) + '` \nType `!back` to set another timer.');
+                msg.reply("You're already on a break. Started: `" + moment(setTimer[msg.author.id]).calendar() + '` \nType `!back` to set another timer.');
             }
             console.log(setTimer);
         }

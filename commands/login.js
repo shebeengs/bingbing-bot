@@ -6,7 +6,7 @@ module.exports = {
     execute(msg, loginTime){
         if (loginTime[msg.author.id] !== undefined){
             msg.react('❌');
-            msg.reply("You have already logged in `" + moment().calendar(loginTime[msg.author.id]) + "`. Please log out first.");
+            msg.reply("You have already logged in `" + moment(loginTime[msg.author.id]).calendar() + "`. Please log out first.");
         }
         else {
             loginTime[msg.author.id] = new Date();

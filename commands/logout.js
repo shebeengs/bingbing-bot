@@ -16,7 +16,7 @@ module.exports = {
         }
         else {
             msg.react('❌');
-            msg.reply('Please log in first.');
+            msg.reply(`You're not logged in. Please log in first.`);
         }
             console.log(loginTime);
             console.log("timeDiff = " + timeDiff);
