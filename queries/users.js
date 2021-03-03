@@ -1,10 +1,11 @@
 const DB = require('pg').Client;
+const util = require('util');
 
 module.exports = {
     name: 'users',
     description: 'Lists users',
     execute(msg, dbConn){
-        var db = new DB(dbConn);
+        const db = new DB(dbConn);
         db.connect().then(
             () => console.log("Database connected.") 
         ).catch(
@@ -15,16 +16,17 @@ module.exports = {
         ).then(
             results => {
                 var dbData = results.rows;
+                var displayresults = [];
                 for(let i = 0; i < dbData.length; i ++){
                     let obj = dbData[i];
-                    var displayresults;
+                    
                     for(let key in obj){
                         //displayresults = `${key}: ${obj[key]}` + displayresults;
-                        displayresults = `${obj[key]}, ` + displayresults;
-                    }
-                }
-                msg.channel.send(displayresults);
+                        displayresults.push(obj[key]);
+                    };
+                };
                 console.table(results.rows);
+                msg.channel.send(displayresults.join(', '));
             }
         ).finally(
             () => {

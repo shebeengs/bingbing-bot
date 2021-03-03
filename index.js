@@ -47,6 +47,7 @@ bot.on('ready', () => {
 const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
+//db test connect
 bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh);
 bot.events.get('payroll').execute(bot, myChannel, servethCh);
 
@@ -59,7 +60,6 @@ db.connect().then(
 ).finally(
     () => console.log("Connection ended.")
 );
-//
 
 //commands
 const prefix = '!';
@@ -113,7 +113,10 @@ bot.on('message', msg => {
     else if (command === 'users'){
         bot.queries.get('users').execute(msg, dbConn);
     }
-    else if (command === 'query') {
+    /*else if (command === 'query') {
         bot.queries.get('query').execute(msg,dbConn,args);
+    }*/
+    else if (command === 'shift') {
+        bot.queries.get('shift').execute(msg, dbConn);
     }
 });
