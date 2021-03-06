@@ -52,7 +52,7 @@ module.exports = {
             }
             else if (args[0] === 'week') {
                 const db = new DB(dbConn);
-                const discordId = msg.author.id;
+                var discordId = (msg.author.id);
 
                 db.connect().then(
                     () => console.log("Database connected")
@@ -76,7 +76,7 @@ module.exports = {
                             var dbData = results.rows;
                             var displayresults = [];
                                 for (var i = 0; i < dbData.length; i+=2) {
-                                    displayresults.push(`${dbData[i].day}: ${dbData[i].starttime} to ${dbData[1].endtime}`);
+                                    displayresults.push(`${dbData[i].day}: ${dbData[i].starttime} to ${dbData[i+1].endtime}`);
                                 }
                             console.table(results.rows);
                             console.log(results.rows);
@@ -84,6 +84,13 @@ module.exports = {
                             msg.channel.send("```"+ msg.author.username + "'s Weekly Schedule \n\n" + displayresults.join("\n") + "```");
                             //msg.channel.send('Coming soon 😛');
                         }
+                    }
+                ).catch(
+                    err => console.log(err)
+                ).finally(
+                    () => {
+                        db.end();
+                        console.log("Database disconnected.");
                     }
                 )
             }
