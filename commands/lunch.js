@@ -19,7 +19,7 @@ module.exports = {
                         }
                         else {
                             msg.reply(`Your lunch ended.`);
-                            delete setTimer[msg.author.id];
+                            //delete setTimer[msg.author.id];
                         }
                     }, 5*60*1000);
                     console.log(setTimer);

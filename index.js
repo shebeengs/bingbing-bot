@@ -6,9 +6,8 @@ const DB = require('pg').Client;
 
 //env var
 const TOKEN = process.env.TOKEN;
-const dbUrl = process.env.DATABASE_URL;
 const dbConn = {
-    connectionString: dbUrl,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
     }
@@ -117,6 +116,6 @@ bot.on('message', msg => {
         bot.queries.get('query').execute(msg,dbConn,args);
     }*/
     else if (command === 'shift') {
-        bot.queries.get('shift').execute(msg, dbConn);
+        bot.queries.get('shift').execute(msg, dbConn, args);
     }
 });
