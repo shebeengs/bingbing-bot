@@ -36,6 +36,7 @@ module.exports = {
                 }
             } catch (error) {
                 console.error(error);
+                msg.reply("Something went wrong. Try again.")
             } finally {
                 await db.end();
                 console.log("Database disconnected.");

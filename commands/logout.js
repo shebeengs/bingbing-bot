@@ -19,7 +19,7 @@ module.exports = {
             } try {
                 let results = await db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId]);
                 if (results.rowCount === 0) {
-                    msg.reply("No recorded logins.");
+                    msg.reply("No recorded logins everrr.");
                 }
 
                 results = await db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId]);
@@ -40,6 +40,7 @@ module.exports = {
                 console.table(results.rows);
             } catch (error) {
                 console.error(error);
+                msg.reply("Something went wrong. Try again.")
             } finally {
                 db.end();
                 console.log("Database disconnected.");
