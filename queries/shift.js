@@ -3,7 +3,7 @@ const moment= require('moment');
 
 module.exports = {
     name: 'shift',
-    description: 'Shows schedule of the user for the day',
+    description: 'Shows schedule of the user for the day or week',
     execute(msg, dbConn, args){
         if (!args.length) {
             msg.react('❌');
@@ -22,7 +22,7 @@ module.exports = {
                 ).catch(
                     err => console.log(err)
                 ).then(
-                    () => db.query('SELECT day, starttime, endtime FROM schedule WHERE discord_id = ($1) AND sched_id = ($2)',[discordId,dayToday])
+                    () => db.query('SELECT day, starttime, endtime FROM schedule WHERE discord_id = ($1) AND sched_id = ($2) ORDER BY id',[discordId,dayToday])
                 ).then(
                     results => {
                         console.table(results.rows);

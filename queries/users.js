@@ -1,5 +1,4 @@
 const DB = require('pg').Client;
-const util = require('util');
 
 module.exports = {
     name: 'users',

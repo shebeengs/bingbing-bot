@@ -1,3 +1,4 @@
+//bingbing-bot: Botbotbot
 require('dotenv').config();
 const Discord = require('discord.js');
 const moment = require('moment');
@@ -89,10 +90,10 @@ bot.on('message', msg => {
         bot.commands.get('back').execute(msg, setTimer);
     }
     else if (command === 'login') {
-        bot.commands.get('login').execute(msg, loginTime);
+        bot.commands.get('login').execute(msg, dbConn);
     }
     else if (command === 'logout') {
-        bot.commands.get('logout').execute(msg, loginTime);
+        bot.commands.get('logout').execute(msg, dbConn);
     }
     else if (command === 'list') {
         bot.commands.get('list').execute(msg);
@@ -112,9 +113,6 @@ bot.on('message', msg => {
     else if (command === 'users'){
         bot.queries.get('users').execute(msg, dbConn);
     }
-    /*else if (command === 'query') {
-        bot.queries.get('query').execute(msg,dbConn,args);
-    }*/
     else if (command === 'shift') {
         bot.queries.get('shift').execute(msg, dbConn, args);
     }
