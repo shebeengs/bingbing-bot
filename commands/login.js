@@ -36,7 +36,7 @@ module.exports = {
                 }
             } catch (error) {
                 console.error(error);
-                msg.reply("Something went wrong. Try again.")
+                msg.reply("Something went wrong. Try again.");
             } finally {
                 await db.end();
                 console.log("Database disconnected.");
@@ -45,37 +45,3 @@ module.exports = {
         logIn();
     }
 }
-
-        /* oldddd
-        const db = new DB(dbConn);
-        var discordId = msg.author.id;
-        const type = 'in';
-
-        db.connect().then(
-            () => console.log("Database connected.")
-        ).catch(
-            err => console.log(err)
-        ).then(
-            () => db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId])
-        ).then(
-            results => {
-                const dbData = results.rows;
-                console.table(dbData);
-                
-                if(dbData[0].logtime === null || dbData[0].type === 'out'){
-                    db.query('INSERT INTO userlogs (discord_id, logtime, type) VALUES (($1),NOW(),($2))', [discordId,type]);
-                    msg.channel.send(`Name: ${msg.author}` + '\nLogin timestamp: '+ '`'+ moment(dbData[0].logtime).format("dddd, MMMM DD, YYYY [at] kk:mm:ss") +'`');
-                }
-                else {
-                    msg.react('❌');
-                    msg.reply("You have already logged in `" + moment(dbData[0].logtime).calendar() + "`");
-                }
-            }
-        ).catch(
-            err => console.log(err)
-        ).finally(
-            () => {
-                db.end();
-                console.log("Database disconnected.");
-            }
-        )*/

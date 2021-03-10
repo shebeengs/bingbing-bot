@@ -115,5 +115,7 @@ bot.on('message', msg => {
     }
     else if (command === 'shift') {
         bot.queries.get('shift').execute(msg, dbConn, args);
+    } else if (command === 'mylogins') {
+        bot.queries.get('mylogins').execute(msg, dbConn, args);
     }
 });
