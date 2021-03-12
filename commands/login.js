@@ -17,16 +17,13 @@ module.exports = {
                 msg.reply("Failed to connect to Botbotbot database. Try again.");
             } try {
                 let results = await db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId]);
-                if (results.rowCount === 0) {
-                    await db.query('INSERT INTO userlogs (discord_id, logtime, type) VALUES (($1), NULL, NULL)',[discordId]);
-                    console.log("First login - user added.")
-                }
-
-                results = await db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId]);
                 let dbData = results.rows;
-                console.table(dbData);
-
-                if (dbData[0].logtime === null || dbData[0].type === 'out'){
+                if (results.rowCount === 0) {
+                    await db.query('INSERT INTO userlogs (discord_id, logtime, type) VALUES (($1),NOW(),($2))', [discordId,type]);
+                    msg.channel.send(`Name: ${msg.author}` + '\nLogin timestamp: '+ '`'+ moment().format("dddd, MMMM DD, YYYY [at] kk:mm:ss") +'`');
+                    console.log("First login - user added.");
+                }
+                else if (dbData[0].type === 'out'){
                     await db.query('INSERT INTO userlogs (discord_id, logtime, type) VALUES (($1),NOW(),($2))', [discordId,type]);
                     msg.channel.send(`Name: ${msg.author}` + '\nLogin timestamp: '+ '`'+ moment().format("dddd, MMMM DD, YYYY [at] kk:mm:ss") +'`');
                 }
