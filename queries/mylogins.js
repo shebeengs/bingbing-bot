@@ -25,7 +25,7 @@ module.exports = {
                     console.log("No logins found.");
                 }
                 else if (results.rowCount === 1) {
-                    msg.channel.send("```       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + `  ${moment(dbData[0].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[0].logtime).format("hh:mm:ss a")} |     --      |    --    \n` + "```");
+                    msg.channel.send("```\n       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + `  ${moment(dbData[0].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[0].logtime).format("hh:mm:ss a")} |     --      |    --    \n` + "```");
                 }
                 else if ((dbData[0].type === 'in') && (results.rowCount > 1)) {
                     console.table(dbData);
@@ -38,7 +38,7 @@ module.exports = {
                         var hours = Math.trunc(moment.duration(timeDiff).asHours());
                         displayresults.push(`  ${moment(dbData[i+1].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[i+1].logtime).format("hh:mm:ss a")} | ${moment(dbData[i].logtime).format("hh:mm:ss a")} | ${hours}h ${minutes}m ${seconds}s `);
                     }
-                    msg.channel.send("```       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + `  ${moment(dbData[0].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[0].logtime).format("hh:mm:ss a")} |     --      |    --    \n` + displayresults.join("\n") + "```");
+                    msg.channel.send("```\n       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + `  ${moment(dbData[0].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[0].logtime).format("hh:mm:ss a")} |     --      |    --    \n` + displayresults.join("\n") + "```");
                     console.log("       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + `  ${moment(dbData[0].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[0].logtime).format("hh:mm:ss a")} |     --      |    --    \n` + displayresults.join("\n"));
                 }
                 else if ((dbData[0].type === 'out') && (results.rowCount > 1)) {
@@ -51,7 +51,7 @@ module.exports = {
                         var hours = Math.trunc(moment.duration(timeDiff).asHours());
                         displayresults.push(`  ${moment(dbData[i+1].logtime).format("ddd MMM DD, YYYY")} | ${moment(dbData[i+1].logtime).format("hh:mm:ss a")} | ${moment(dbData[i].logtime).format("hh:mm:ss a")} | ${hours}h ${minutes}m ${seconds}s  `);
                     }
-                    msg.channel.send("```       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + displayresults.join("\n") + "```");
+                    msg.channel.send("```\n       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + displayresults.join("\n") + "```");
                     console.log("       Date        |    Login    |   Logout    |  Duration  \n-------------------------------------------------------------\n" + displayresults.join("\n"));
                 }
             } catch (error) {

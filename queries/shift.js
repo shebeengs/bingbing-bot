@@ -39,10 +39,10 @@ module.exports = {
                 }
                 else {
                     if (results.rowCount === 2){
-                        msg.channel.send(`${msg.author.username}'s schedule for today:` + "```       Date       | Start time | End time \n------------------------------------------\n" + ` ${moment().day(dbData[0].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[0].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(1)].endtime, "hh:mm:ss").format("hh:mm a")} ` + '```');
+                        msg.channel.send(`${msg.author.username}'s schedule for today:\n` + "```       Date       | Start time | End time \n------------------------------------------\n" + ` ${moment().day(dbData[0].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[0].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(1)].endtime, "hh:mm:ss").format("hh:mm a")} ` + '```');
                     }
                     else {
-                        msg.channel.send(`${msg.author.username}'s schedule for today:` + "```       Date       | Start time | End time \n------------------------------------------\n" + ` ${moment().day(dbData[0].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[0].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(0)].endtime, "hh:mm:ss").format("hh:mm a")} ` + '```');
+                        msg.channel.send(`${msg.author.username}'s schedule for today:\n` + "```       Date       | Start time | End time \n------------------------------------------\n" + ` ${moment().day(dbData[0].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[0].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(0)].endtime, "hh:mm:ss").format("hh:mm a")} ` + '```');
                     }
                 }
                 console.log(results.rowCount);
@@ -77,7 +77,7 @@ module.exports = {
                         console.table(results.rows);
                         console.log(results.rows);
                         console.log(results.rowCount);
-                        msg.channel.send(msg.author.username + "'s weekly schedule:" + "```       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
+                        msg.channel.send(msg.author.username + "'s weekly schedule:\n" + "```       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
                     }
                     else {
                         var dbData = results.rows;
@@ -88,7 +88,7 @@ module.exports = {
                         console.table(results.rows);
                         console.log(results.rows);
                         console.log(results.rowCount);
-                        msg.channel.send(msg.author.username + "'s weekly schedule:" + "```       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
+                        msg.channel.send(msg.author.username + "'s weekly schedule:\n" + "```       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
                     }
                 }
                 
