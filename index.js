@@ -15,7 +15,6 @@ const dbConn = {
 };
 //clients
 const bot = new Discord.Client();
-const db = new DB(dbConn);
 
 //handlers
 bot.commands = new Discord.Collection();
@@ -47,19 +46,8 @@ bot.on('ready', () => {
 const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
-//db test connect
 bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh);
 bot.events.get('payroll').execute(bot, myChannel, servethCh);
-
-db.connect().then(
-    () => console.log("Test connection successful") 
-).catch(
-    err => console.log(err)
-).then(
-    () => db.end()
-).finally(
-    () => console.log("Connection ended.")
-);
 
 //commands
 const prefix = '!';

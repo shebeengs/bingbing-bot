@@ -18,13 +18,11 @@ module.exports = {
                 msg.reply("Failed to connect to Botbotbot database. Try again.");
             } try {
                 let results = await db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId]);
+                const dbData = results.rows;
                 if (results.rowCount === 0) {
                     msg.reply("No recorded logins everrr.");
                 }
-
-                results = await db.query('SELECT * FROM userlogs WHERE discord_id = ($1) ORDER BY id DESC LIMIT 1',[discordId]);
-                const dbData = results.rows;
-                if(dbData[0].logtime === null || dbData[0].type === 'out') {
+                else if(dbData[0].type === 'out') {
                     msg.react('❌');
                     msg.reply("You're not logged in. Type `!login` to log in. ");
                 }

@@ -28,7 +28,7 @@ module.exports = {
                 console.error(error);
                 msg.reply("Failed to connect to Botbotbot database. Try again.");
             } try {
-                let results = await db.query('SELECT day, starttime, endtime FROM schedule WHERE discord_id = ($1) AND sched_id = ($2) ORDER BY id',[discordId,dayToday]);
+                let results = await db.query('SELECT * FROM schedule WHERE discord_id = ($1) AND sched_id = ($2) ORDER BY id',[discordId,dayToday]);
 
                 console.table(results.rows);
                 console.log(results.rows);
@@ -39,10 +39,10 @@ module.exports = {
                 }
                 else {
                     if (results.rowCount === 2){
-                        msg.channel.send(`${msg.author.username}'s schedule for today ` + moment().format("dddd, MMMM DD, YYYY") + ': `' + `${dbData[0].starttime} to ${dbData[1].endtime}` + '`');
+                        msg.channel.send(`${msg.author.username}'s schedule for today:` + "```       Date       | Start time | End time \n------------------------------------------\n" + ` ${moment().day(dbData[0].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[0].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(1)].endtime, "hh:mm:ss").format("hh:mm a")} ` + '```');
                     }
                     else {
-                        msg.channel.send(`${msg.author.username}'s schedule for today ` + moment().format("dddd, MMMM DD, YYYY") + ': `' + `${dbData[0].starttime} to ${dbData[0].endtime}` + '`');
+                        msg.channel.send(`${msg.author.username}'s schedule for today:` + "```       Date       | Start time | End time \n------------------------------------------\n" + ` ${moment().day(dbData[0].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[0].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(0)].endtime, "hh:mm:ss").format("hh:mm a")} ` + '```');
                     }
                 }
                 console.log(results.rowCount);
@@ -72,23 +72,23 @@ module.exports = {
                         var dbData = results.rows;
                         var displayresults = [];
                             for (var i = 0; i < dbData.length; i++) {
-                                displayresults.push(`${dbData[i].day}: ${dbData[i].starttime} to ${dbData[(i)].endtime}`);
+                                displayresults.push(` ${moment().day(dbData[i].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[i].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(i)].endtime, "hh:mm:ss").format("hh:mm a")} `);
                             }
                         console.table(results.rows);
                         console.log(results.rows);
                         console.log(results.rowCount);
-                        msg.channel.send("```"+ msg.author.username + "'s Weekly Schedule \n\n" + displayresults.join("\n") + "```");
+                        msg.channel.send("```" + msg.author.username + "'s Weekly Schedule \n\n       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
                     }
                     else {
                         var dbData = results.rows;
                         var displayresults = [];
                             for (var i = 0; i < dbData.length; i+=2) {
-                                displayresults.push(`${dbData[i].day}: ${dbData[i].starttime} to ${dbData[i+1].endtime}`);
+                                displayresults.push(` ${moment().day(dbData[i].sched_id).format("ddd MMM DD, YYYY")} |  ${moment(dbData[i].starttime,"hh:mm:ss").format("hh:mm a")}  | ${moment(dbData[(i+1)].endtime, "hh:mm:ss").format("hh:mm a")} `);
                             }
                         console.table(results.rows);
                         console.log(results.rows);
                         console.log(results.rowCount);
-                        msg.channel.send("```"+ msg.author.username + "'s Weekly Schedule \n\n" + displayresults.join("\n") + "```");
+                        msg.channel.send("```" + msg.author.username + "'s Weekly Schedule \n\n       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
                     }
                 }
                 
