@@ -83,7 +83,7 @@ bot.on('message', msg => {
     else if (command === 'logout') {
         bot.commands.get('logout').execute(msg, dbConn);
     }
-    else if (command === 'list') {
+    else if ((command === 'list') || (command === 'help')) {
         bot.commands.get('list').execute(msg);
     }
     else if (command === 'break') {

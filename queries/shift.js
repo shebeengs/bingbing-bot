@@ -77,7 +77,7 @@ module.exports = {
                         console.table(results.rows);
                         console.log(results.rows);
                         console.log(results.rowCount);
-                        msg.channel.send("```" + msg.author.username + "'s Weekly Schedule \n\n       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
+                        msg.channel.send(msg.author.username + "'s weekly schedule:" + "```       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
                     }
                     else {
                         var dbData = results.rows;
@@ -88,7 +88,7 @@ module.exports = {
                         console.table(results.rows);
                         console.log(results.rows);
                         console.log(results.rowCount);
-                        msg.channel.send("```" + msg.author.username + "'s Weekly Schedule \n\n       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
+                        msg.channel.send(msg.author.username + "'s weekly schedule:" + "```       Date       | Start time | End time \n------------------------------------------\n" + displayresults.join("\n") + "```");
                     }
                 }
                 
