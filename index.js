@@ -47,15 +47,17 @@ const myChannel = `811208862233002008`;
 const servethCh = `801523538917064746`;
 
 bot.events.get('weeklymeeting').execute(bot, myChannel, servethCh);
-bot.events.get('payroll').execute(bot, myChannel, servethCh);
+//bot.events.get('payroll').execute(bot, myChannel, servethCh);
 
 //commands
 const prefix = '!';
 var setTimer = {};
 var loginTime = {};
 var breakLength;
+var msgcounter;
 
 bot.on('message', msg => {
+    bot.events.get('msgcounting').execute(msgcounter,msg);
     if (msg.content === 'hello') {
         msg.react('👋');
     }
